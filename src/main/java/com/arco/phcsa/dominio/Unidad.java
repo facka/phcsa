@@ -1,9 +1,25 @@
 package com.arco.phcsa.dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "unidad")
 public class Unidad {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_UNIDAD")
 	long idUnidad;
+	
+	@Column(name = "NUMERO")
 	int numero;
+	
+	@Column(name = "DIRECCION_EXTENDIDA")
 	String direccionExtendida;
 	
 	public Unidad(long id, int numero, String direccionExtendida) {

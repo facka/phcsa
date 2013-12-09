@@ -3,29 +3,46 @@ package com.arco.phcsa.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.apache.log4j.Logger;
 
+@Entity
+@Table(name = "edificio")
 public class Edificio {
 	
 	private static final Logger log = Logger.getLogger(Edificio.class.getCanonicalName());
 	
-	private long idEdificio;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idEdificio;
+	
+	@Column(name = "DIRECCION")
 	private String direccion;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idUnidad")
 	private List<Unidad> unidades;
 	
 	public Edificio() {
 	}
 	
-	public Edificio(long id, String direccion) {
+	public Edificio(int id, String direccion) {
 		idEdificio = id;
 		this.direccion = direccion;
 		unidades = new ArrayList<Unidad>();
 	}
 	
-	public long getIdEdificio() {
+	public int getIdEdificio() {
 		return idEdificio;
 	}
-	public void setIdEdificio(long idEdificio) {
+	public void setIdEdificio(int idEdificio) {
 		this.idEdificio = idEdificio;
 	}
 	public void setDireccion(String direccion) {
