@@ -8,7 +8,7 @@ public interface ServicioEdificio {
 	
 	public Edificio create(Edificio edificio);
 	public Edificio delete(int id);
-	public List<Edificio> ListarTodos();
+	public List<Edificio> listarTodos();
 	public Edificio update(Edificio Edificio);
 	public Edificio findById(int id);
 

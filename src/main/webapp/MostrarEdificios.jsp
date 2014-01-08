@@ -14,6 +14,7 @@
 	</br>
 	<%
 	List<Edificio> listaDeEdificios = (List<Edificio>)request.getAttribute("edificios");
+	
 	for(Edificio edificio:listaDeEdificios){
 	  %>
 	<h1><%=edificio.getIdEdificio()+": "+edificio.getDireccion()%></h1>

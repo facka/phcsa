@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.arco.phcsa.dominio.Edificio;
+import com.arco.phcsa.dominio.Unidad;
 import com.arco.phcsa.servicios.ServicioEdificio;
 
 @Controller
@@ -27,31 +33,63 @@ public class ControladorEdificiosRest {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//se invoca /edificios/get?id=1
-	@RequestMapping(value="get", params="id")
-	@ResponseBody
-	public Edificio getEdificioById(@RequestParam Integer id) {
+	//se invoca /edificios/{id}
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody 
+	public Edificio getEdificioById(@PathVariable String id) {
 		log.info("entro en el GetEdificioByID");
-		Edificio edificio = new Edificio(id, "Larrea 1354 - " + id.toString());
-		edificioServicio.create(edificio);
+		//Edificio edificio = new Edificio(id, "Larrea 1354 - " + id.toString());
+		//edificioServicio.create(edificio);
 		
 		log.info("busca el edificio");
-		return edificioServicio.findById(id);
+		return edificioServicio.findById(Integer.parseInt(id));
 	}
 	
-	@RequestMapping("getAll")
+	//se invoca /edificios/{id}
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void updateEdificioById(@PathVariable String id, @RequestBody Edificio edificioToUpdate) {
+		log.info("entro en el updateEdificioByID");
+		Edificio edificio = edificioServicio.findById(Integer.parseInt(id));
+		if (edificioToUpdate.getDireccion() != null) {
+			edificio.setDireccion(edificioToUpdate.getDireccion());
+		}
+		edificioServicio.update(edificio);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.CREATED)
+	@ResponseBody
+	public void createEdificio(@RequestBody Edificio edificio) {
+		log.info("entro en el getEdificios");
+		if (edificio.getUnidades() == null)
+			edificio.setUnidades(new ArrayList<Unidad>());
+		edificioServicio.create(edificio);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Edificio> getEdificios() {
 		log.info("entro en el getEdificios");
-		List<Edificio> list = new ArrayList<Edificio>();
-		list.add( new Edificio(1,"Larrea 1354"));
-		list.add( new Edificio(2,"Vidal 1345"));
-		list.add( new Edificio(3,"Marcelo T. Alvear 354"));
-		list.add( new Edificio(4,"Rivadavia 1354"));
-		return list;
+		return edificioServicio.listarTodos();
 	}
 	
-	
+
+	//se invoca /edificios/{id}
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void updateEdificioById(@PathVariable String id) {
+		log.info("entro en el updateEdificioByID");
+		Edificio edificio = edificioServicio.findById(Integer.parseInt(id));
+		if (edificio.getUnidades().isEmpty())
+			edificioServicio.delete(Integer.parseInt(id));
+		else {
+			//TODO fcrego: el servicio debe lanzar una excepcion de integridad al intentar eliminar un edificio con unidades.
+			log.debug("No se puede borrar un edificio que tiene unidades.");
+		}
+		
+	}
 	
 
 }

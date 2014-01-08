@@ -11,21 +11,15 @@ import com.arco.phcsa.dominio.Edificio;
 import com.arco.phcsa.repositorios.EdificioRepositorio;
 
 @Service
-public class ServicioEdificiosImpl implements ServicioEdificio {
+public class ServicioEdificioImpl implements ServicioEdificio {
 
 	@Resource
 	private EdificioRepositorio edificioRepositorio;
 
 	@Override
 	@Transactional
-	public List<Edificio> ListarTodos() {
+	public List<Edificio> listarTodos() {
 		return edificioRepositorio.findAll();
-	}
-
-	public void crearEdificio() {
-		Edificio edificio = new Edificio(1, "Larrea 1354");
-		create(edificio);
-		edificio = new Edificio(2, "Marcelo T. De Alvear 1934");
 	}
 
 	@Override

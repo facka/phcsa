@@ -11,8 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Null;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 @Entity
 @Table(name = "edificio")
@@ -22,12 +25,14 @@ public class Edificio {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "id")
 	private int idEdificio;
 	
 	@Column(name = "DIRECCION")
 	private String direccion;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idUnidad")
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "idUnidad")
 	private List<Unidad> unidades;
 	
 	public Edificio() {
