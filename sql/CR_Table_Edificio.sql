@@ -1,12 +1,11 @@
--- Table: "Edificio"
+- Table: edificio
 
--- DROP TABLE "Edificio";
+-- DROP TABLE edificio;
 
-CREATE TABLE "Edificio"
+CREATE TABLE edificio
 (
-  id_edificio bigint NOT NULL,
-  direccion text,
-  CONSTRAINT edificio_pk PRIMARY KEY (id_edificio)
-);
-
+  id integer NOT NULL DEFAULT nextval('edificio_idedificio_seq'::regclass),
+  direccion character varying(60) NOT NULL,
+  CONSTRAINT edificio_pkey PRIMARY KEY (id)
+)
 
