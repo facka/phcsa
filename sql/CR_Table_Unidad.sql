@@ -13,6 +13,11 @@ CREATE TABLE unidad
       REFERENCES edificio (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE unidad
+  OWNER TO postgres;
 
 -- Index: fki_eidificio_fk
 
@@ -22,3 +27,4 @@ CREATE INDEX fki_eidificio_fk
   ON unidad
   USING btree
   (idedificio);
+
