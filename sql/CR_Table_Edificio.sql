@@ -1,4 +1,4 @@
-- Table: edificio
+-- Table: edificio
 
 -- DROP TABLE edificio;
 
@@ -8,4 +8,8 @@ CREATE TABLE edificio
   direccion character varying(60) NOT NULL,
   CONSTRAINT edificio_pkey PRIMARY KEY (id)
 )
-
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE edificio
+  OWNER TO postgres;
