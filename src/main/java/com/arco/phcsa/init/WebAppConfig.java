@@ -25,8 +25,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("com.arco.phcsa")
 @PropertySource("classpath:application.properties")
+@ComponentScan("com.arco.phcsa")
 @EnableJpaRepositories("com.arco.phcsa.repositorios")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 

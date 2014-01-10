@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.arco.phcsa.controladores.rest.ControladorEdificiosRest;
-
 @Controller
 @RequestMapping("/")
 public class ControladorIndex {
