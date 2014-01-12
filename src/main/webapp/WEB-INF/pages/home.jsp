@@ -16,7 +16,7 @@
 			</ul>
 		</div>
 		
-		<a href="" ng-click="deleteSelected()">Delete selected</a>
+		<a href="" ng-click="deleteSelected()">Delete selected</a> 
 
 		<input type="text" ng-model="direccionText" size="30"
 				placeholder="direccion"> <button ng-click="addEdificio()">Agregar</button>
