@@ -6,20 +6,20 @@
 	<div ng-app="App">
 		<div ng-controller="Edificios">
 			<input type="text" ng-model="idEdificio" size="80" />
-			<button ng-click="buscar()">Buscar</button>
+			<button id="buscarButton" ng-click="buscar()">Buscar</button>
 			<br>
 			
 			<ul class="unstyled">
-				<li ng-repeat="edificio in edificios"><input type="checkbox"
+				<li ng-repeat="edificio in edificios"><input id="deleteCheck" type="checkbox"
 					ng-model="edificio.deleted"> <span>{{edificio.idEdificio}} - {{edificio.direccion}}</span>
 				</li>
 			</ul>
-		</div>
-		
-		<a href="" ng-click="deleteSelected()">Delete selected</a> 
+			
+			<a id="deleteButton" href="" ng-click="deleteSelected()">Delete selected</a> 
 
-		<input type="text" ng-model="direccionText" size="30"
-				placeholder="direccion"> <button ng-click="addEdificio()">Agregar</button>
+			<input type="text" ng-model="direccionText" size="30"
+				placeholder="direccion"> <button id="agregarButton" ng-click="addEdificio()">Agregar</button>
+		</div>	
 	</div>
 </body>
 </html>

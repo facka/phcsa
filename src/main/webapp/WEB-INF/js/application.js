@@ -21,11 +21,28 @@ function Edificios($scope, $http, $templateCache) {
 
 	$scope.deleteSelected = function() {
 		var oldEdificios = $scope.edificios;
-		$scope.edificios = [];
-		angular.forEach(oldEdificios, function(edificio) {
-			if (!edificio.deleted)
-				$scope.edificios.push(edificio);
+		//$scope.edificios = [];
+		var i = 0;
+		angular.forEach($scope.edificios, function(edificio) {
+			
+			if (edificio.deleted) {
+				$http({
+					method : "DELETE",
+					url : "/phcsa/edificios/"+edificio.idEdificio+"?"+getRandomParam(),
+					cache : $templateCache,
+		            headers: {'Content-Type': 'application/json'}
+				}).success(function(data, status) {
+					$scope.buscar();
+				}).error(function(data, status) {
+					$scope.data = data || "Request failed";
+				});
+				
+			}
+			
+			i++;
+				
 		});
+		
 	};
 
 	$scope.addEdificio = function() {
