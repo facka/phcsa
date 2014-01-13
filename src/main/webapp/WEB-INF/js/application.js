@@ -20,9 +20,6 @@ function Edificios($scope, $http, $templateCache) {
 	};
 
 	$scope.deleteSelected = function() {
-		var oldEdificios = $scope.edificios;
-		//$scope.edificios = [];
-		var i = 0;
 		angular.forEach($scope.edificios, function(edificio) {
 			
 			if (edificio.deleted) {
