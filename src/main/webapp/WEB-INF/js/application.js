@@ -35,9 +35,6 @@ function Edificios($scope, $http, $templateCache) {
 				});
 				
 			}
-			
-			i++;
-				
 		});
 		
 	};
