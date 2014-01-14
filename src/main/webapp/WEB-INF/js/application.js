@@ -6,11 +6,18 @@ function Edificios($scope, $http, $templateCache) {
 		return "r="+Math.floor((Math.random()*1000000)+1);
 	};
 	
-	$scope.buscar = function() {
-
+	$scope.buscar = function() {		
+		var url;
+		
+		if (!$scope.query){
+			url = "/phcsa/edificios?"+getRandomParam();
+		}
+		else
+			url = "/phcsa/edificios?query="+$scope.query+"&"+getRandomParam();
+		
 		$http({
 			method : "GET",
-			url : "/phcsa/edificios?"+getRandomParam(),
+			url : url,
 			cache : $templateCache
 		}).success(function(data, status) {
 			$scope.edificios = data;

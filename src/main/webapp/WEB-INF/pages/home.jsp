@@ -5,7 +5,7 @@
 <body>
 	<div ng-app="App">
 		<div ng-controller="Edificios">
-			<input type="text" ng-model="idEdificio" size="80" />
+			<input type="text" ng-model="query" size="80" />
 			<button id="buscarButton" ng-click="buscar()">Buscar</button>
 			<br>
 			

@@ -11,5 +11,6 @@ public interface ServicioEdificio {
 	public List<Edificio> listarTodos();
 	public Edificio update(Edificio Edificio);
 	public Edificio findById(int id);
+	public List<Edificio> findByDireccionLike(String direccion);
 
 }

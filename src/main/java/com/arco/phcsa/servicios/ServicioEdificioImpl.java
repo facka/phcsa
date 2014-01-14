@@ -58,4 +58,9 @@ public class ServicioEdificioImpl implements ServicioEdificio {
 		return edificioRepositorio.findOne(id);
 	}
 
+	@Override
+	public List<Edificio> findByDireccionLike(String direccion) {
+		return edificioRepositorio.findByDireccionLike("%"+direccion+"%");
+	}
+
 }

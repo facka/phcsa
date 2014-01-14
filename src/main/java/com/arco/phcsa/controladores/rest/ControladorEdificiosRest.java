@@ -70,9 +70,12 @@ public class ControladorEdificiosRest {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public List<Edificio> getEdificios() {
+	public List<Edificio> getEdificios(@RequestParam(value="query", required= false) String query) {
 		log.info("entro en el getEdificios");
-		return edificioServicio.listarTodos();
+		if (query == null)
+			return edificioServicio.listarTodos();
+		else
+			return edificioServicio.findByDireccionLike(query);
 	}
 	
 
