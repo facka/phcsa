@@ -29,7 +29,7 @@ function Edificios($scope, $http, $templateCache) {
 	$scope.deleteSelected = function() {
 		angular.forEach($scope.edificios, function(edificio) {
 			
-			if (edificio.deleted) {
+			if (edificio.selected) {
 				$http({
 					method : "DELETE",
 					url : "/phcsa/edificios/"+edificio.idEdificio+"?"+getRandomParam(),
@@ -57,6 +57,33 @@ function Edificios($scope, $http, $templateCache) {
 			}).success(function(data, status) {
 				$scope.buscar();
 				$scope.direccionText = '';
+			}).error(function(data, status) {
+				$scope.data = data || "Request failed";
+			});
+		}
+		else {
+			console.log("Inserte direccion");
+		}
+			
+	};
+	
+	$scope.setEdificioToEdit = function(edificio) {
+		$scope.edificioToEdit = edificio;
+	};
+	
+
+	$scope.updateEdificio = function() {
+		if ($scope.edificioToEdit.direccion) {
+			$http({
+				method : "PUT",
+				url : "/phcsa/edificios/"+$scope.edificioToEdit.idEdificio+"?"+getRandomParam(),
+				cache : $templateCache,
+				data: $scope.edificioToEdit,
+	            headers: {'Content-Type': 'application/json'}
+			}).success(function(data, status) {
+				$scope.edificioToEdit = {};
+				$scope.buscar();
+				$('#editEdificioDialog').modal('hide');
 			}).error(function(data, status) {
 				$scope.data = data || "Request failed";
 			});
